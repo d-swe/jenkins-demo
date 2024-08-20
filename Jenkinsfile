@@ -7,19 +7,19 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                sh "Building Stage 1"
+                sh "echo Building Stage 1"
             }
         }
 
         stage ('Test') {
             steps {
-                sh "Testing Stage 2"
+                sh "echo Testing Stage 2"
             }
         }
 
         stage ('Deploy') {
             steps {
-                sh "Deploying Stage 3"
+                sh "echo Deploying Stage 3"
             }
         }
     }
