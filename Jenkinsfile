@@ -20,6 +20,11 @@ pipeline {
                 }
             }
         }
+        stage('Build Backend') {
+            steps {
+                sh "cd demo && mvn clean install"
+            }
+        }
 
         // stage ('Test') {
         //     steps {
