@@ -11,11 +11,16 @@ pipeline {
                 sh "cd frontend && npm install && npm run build"
             }
         }
-        stage('Deploy Frontend') {
-            steps {
-                script {
-                    withAWS(region: 'us-east-2', credentials: 'AWS_CREDENTIALS') {
-                        sh "aws s3 sync frontend/dist s3://candy-inventory-management"
+        stage('Deploy Frontend'){
+            steps{
+                script{
+                    try {
+                      withAWS(region: 'us-east-2', credentials: 'AWS_CREDENTIALS'){
+                        sh "aws s3 sync frontend/dist s3://candy-inventory-management" 
+                        }catch (Exception e) {
+                            echo "${e}"
+                            throw e
+                        }   
                     }
                 }
             }
@@ -23,6 +28,11 @@ pipeline {
         stage('Build Backend') {
             steps {
                 sh "cd demo && mvn clean install"
+            }
+        }
+        stage('Test Backend'){
+            steps{
+                sh "cd demo && mvn test"
             }
         }
 
