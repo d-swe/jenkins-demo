@@ -16,7 +16,7 @@ pipeline {
                 script{
                     // try {
                       withAWS(region: 'us-east-2', credentials: 'AWS_CREDENTIALS') {
-                        sh "aws s3 sync frontend/dist/ s3://candy-inventory-management/" 
+                        sh "aws s3 sync frontend/dist s3://dkim-bucket" 
                     }
                     // }catch (Exception e) {
                     //         echo "${e}"
